@@ -4,14 +4,14 @@ var http = require("http");
 var url = require("url");
 
 // This function start a server with a router
-function start(route) {
+function start(route, handle) {
     // This function will be called at every requests
     function onRequest(request, response) {
         var pathname = url.parse(request.url).pathname;
         console.log("Request for " + pathname + " received.");
         
         // Routing the pathname
-        route(pathname);
+        route(handle, pathname);
         
         response.writeHead(200, {"Content-Type": "text/plain"});
         response.write("Hello World");
