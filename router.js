@@ -1,10 +1,10 @@
 // Defining routing function for pathname
-function route(handle, pathname, response) {
+function route(handle, pathname, response, postData) {
     console.log("About to route request for " + pathname);
     // Checking if action is mapped with given pathname
     if (typeof handle[pathname] == "function") {
         // Calling action
-        handle[pathname](response);
+        handle[pathname](response, postData);
     } else {
         console.log("No request handler found for " + pathname);
         // Writing a 404 error page

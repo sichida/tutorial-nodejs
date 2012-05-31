@@ -7,11 +7,23 @@ var url = require("url");
 function start(route, handle) {
     // This function will be called at every requests
     function onRequest(request, response) {
+        var postData = "";
         var pathname = url.parse(request.url).pathname;
         console.log("Request for " + pathname + " received.");
         
-        // Routing the pathname and giving the response
-        route(handle, pathname, response);
+        // Set default encoding to UTF-8
+        request.setEncoding("utf8");
+        // Add listener for callback data when POST data is hudge
+        request.addListener("data", function(postDataChunk) {
+            postData += postDataChunk;
+            console.log("Received POST data chunk '"+ postDataChunk + "'.");
+        });
+        
+        // Add listener for callback data when all POST data has been received
+        request.addListener("end", function() {
+            // Routing the pathname and giving the response
+            route(handle, pathname, response, postData);
+        });
     }
     
     // Creating the server with call back function
