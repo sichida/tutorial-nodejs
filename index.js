@@ -10,6 +10,7 @@ var handle = {};
 handle["/"] = requestHandlers.start;
 handle["/start"] = requestHandlers.start;
 handle["/upload"] = requestHandlers.upload;
+handle["/json"] = requestHandlers.json;
 
 // Starting server by passing the rooter instance
 server.start(router.route, handle);
