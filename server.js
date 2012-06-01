@@ -28,7 +28,7 @@ function start(route, handle) {
     
     // Creating the server with call back function
     // Using process.env.C9_PORT as port number in order to be compliant with Cloud9IDE
-    http.createServer(onRequest).listen(process.env.C9_PORT);
+    http.createServer(onRequest).listen(process.env.PORT || process.env.VCAP_APP_PORT);
     console.log("Server has started.");
 }
 
